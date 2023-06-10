@@ -111,7 +111,7 @@ namespace Nervi {
  */
     void NVirtualMachineStorage::setValueAt(long long index, char value) {
         if (index < 0 || index > this->size) {
-            throw InvalidIndexException(std::string("Invalid storage adress") + std::to_string(index));
+            throw InvalidIndexException(fmt::format("Invalid required index: {} (expected positive and less than {})", index, this->size));
         } else if (!(this->isLocked(index))) {
             this->storage[index] = value;
         } else {
@@ -128,7 +128,7 @@ namespace Nervi {
  */
     char NVirtualMachineStorage::getValueAt(long long index) {
         if (index < 0 || index > this->size) {
-            throw InvalidIndexException(std::string("Invalid storage adress") + std::to_string(index));
+            throw InvalidIndexException(fmt::format("Invalid required index: {} (expected positive and less than {})", index, this->size));
         } else {
             return this->storage[index];
         }

@@ -6,12 +6,14 @@
 #ifndef NERVI_LOCAL_H
 #define NERVI_LOCAL_H
 
-class InvalidIndexException {
-    public:
-        InvalidIndexException(std::string message): message{message}{}
-        virtual std::string getMessage() const {return message;}
-    private:
-        std::string message;
+class InvalidIndexException: public std::exception {
+private:
+    std::string message_;
+public:
+    explicit InvalidIndexException(const std::string& message);
+    const char* what() const noexcept override {
+        return message_.c_str();
+    }
 };
 
 class LockedAdressException: public std::exception {
@@ -25,8 +27,7 @@ public:
 };
 
 
-LockedAdressException::LockedAdressException(const std::string& message) : message_(message) {
-
-}
+LockedAdressException::LockedAdressException(const std::string& message) : message_(message) {}
+InvalidIndexException::InvalidIndexException(const std::string& message) : message_(message) {}
 
 #endif //NERVI_LOCAL_H

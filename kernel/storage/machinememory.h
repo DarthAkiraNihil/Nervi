@@ -9,13 +9,19 @@
 #ifndef KERNEL_STORAGE_NMEM
 #define KERNEL_STORAGE_NMEM
 
+
 /**
- * \brief Represents the class of an internal memory device of a virtual machine
- * \details The class is for storing char values in an array, whose size is immutable and limited my the max value of the type long long.
- * Also provides an opportunity to protect cells from writing (i.e. locking), the indeces of th locked are stored in a list
+ * \brief The Main namespace of the library
+ * \details Represents the namespace which contains all the classes, structs and methods of Nervi Kernel
  */
+
 namespace Nervi {
 
+    /**
+    * \brief Represents the class of an internal memory device of a virtual machine
+    * \details The class is for storing char values in an array, whose size is immutable and limited my the max value of the type long long.
+    * Also provides an opportunity to protect cells from writing (i.e. locking), the indexes of th locked are stored in a list
+    */
     class NVirtualMachineStorage {
     private:
         char *storage;

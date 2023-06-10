@@ -37,7 +37,7 @@ namespace Nervi {
         long long getSize();
         void setValueAt(long long index, char value);
         char getValueAt(long long index);
-        void pushToRegister(short registerName, char value);
+        void pushToRegister(Nervi::NRegisterNames registerName, char value);
     };
 
     bool NVirtualMachineStorage::isLocked(long long index) {
@@ -134,8 +134,8 @@ namespace Nervi {
         }
     }
 
-    void NVirtualMachineStorage::pushToRegister(short registerName, char value) {
-        if (registerName < 0 || registerName > 27) {
+    void NVirtualMachineStorage::pushToRegister(Nervi::NRegisterNames registerName, char value) {
+        if (registerName > 27) {
             //throw
         }
         else {

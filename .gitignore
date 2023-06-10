@@ -7,7 +7,7 @@
 /kernel/error/nerror.h
 /kernel/error/nexception.h
 /kernel/call/
-/doc/
+
 /cmake-build-debug/
 /3rdparty/fmt/doc/
 /3rdparty/fmt/src/
@@ -20,3 +20,7 @@
 /3rdparty/fmt/README.rst
 /sdk/
 /kernel/storage/test.cpp
+/doc/latex/
+/kernel/
+/3rdparty/
+

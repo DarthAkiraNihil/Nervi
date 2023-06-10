@@ -1,0 +1,5 @@
+#ifndef KERNEL_STORAGE_NMEMC
+#define KERNEL_STORAGE_NMEMC
+
+
+#endif

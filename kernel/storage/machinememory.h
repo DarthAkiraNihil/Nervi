@@ -21,7 +21,7 @@
  * \details Represents the namespace which contains all the classes, structs and methods of Nervi Kernel
  */
 
-namespace Nervi {
+namespace NerviKernel {
 
     /**
     * \brief Represents the class of an internal memory device of a virtual machine
@@ -43,7 +43,7 @@ namespace Nervi {
         long long getSize();
         void setValueAt(long long index, char value);
         char getValueAt(long long index);
-        void pushToRegister(Nervi::NRegisterNames registerName, char value);
+        void pushToRegister(NerviKernel::NRegisterNames registerName, char value);
     };
 
     bool NVirtualMachineStorage::isLocked(long long index) {
@@ -62,7 +62,7 @@ namespace Nervi {
 
     /**
      * \brief The NVirtualMachineStorage constructor that creates a null-determined storage device.
-     * Initializes storage's memory array with the defined size and initializes its cells with zeros
+     * \details Initializes storage's memory array with the defined size and initializes its cells with zeros
      * \param size The size of storage array in bytes. Max is 2^64 - 1 bytes
      */
     NVirtualMachineStorage::NVirtualMachineStorage(long long size) {
@@ -72,8 +72,8 @@ namespace Nervi {
     }
 
     /**
-     * \brief The NVirtualMachineStorage destructor that released all its used resources.
-     * Deletes all storage array data that have been reserved by creating an object of the class, clears the list of the locked addresses and defines its size as 0
+     * \brief The NVirtualMachineStorage destructor that releases all its used resources.
+     * \details Deletes all storage array data that have been reserved by creating an object of the class, clears the list of the locked addresses and defines its size as 0
      */
     NVirtualMachineStorage::~NVirtualMachineStorage() {
         delete[] this->storage;
@@ -117,15 +117,15 @@ namespace Nervi {
     }
 
     /**
-     * Returns the size of the storage
-     * @return The size of the storage
+     * \brief Returns the size of the storage
+     * \return The size of the storage
      */
     long long NVirtualMachineStorage::getSize() {
         return this->size;
     }
 
     /**
-     * Writes a value to the cell of the storage at desired index.
+     * \brief Writes a value to the cell of the storage at desired index.
      * \param index The address of destination
      * \param value The value to write
      * \throw InvalidIndexException If the index is out of bounds of the storage array
@@ -167,7 +167,7 @@ namespace Nervi {
      * \throw InstructionPointerInterruptionPushException If there has been an attempt to push a value to IP register
      * \throw InvalidRegisterException If the required register does not exist
      */
-    void NVirtualMachineStorage::pushToRegister(Nervi::NRegisterNames registerName, char value) {
+    void NVirtualMachineStorage::pushToRegister(NerviKernel::NRegisterNames registerName, char value) {
         if (registerName > 27) {
             throw NerviInternalExceptions::InvalidRegisterException(fmt::format("Invalid required register index: {}", int(registerName)));
         }

@@ -5,7 +5,7 @@
 #ifndef NERVI_REGADRESSES_H
 #define NERVI_REGADRESSES_H
 
-namespace Nervi {
+namespace NerviKernel {
     /**
      * \brief The names of memory registers
      * \details Contains the names of all NRegisters that are used as aliases instead of using them directly by the struct.

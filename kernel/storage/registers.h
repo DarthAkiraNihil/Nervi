@@ -4,7 +4,7 @@
 
 #ifndef NERVI_REGISTERS_H
 #define NERVI_REGISTERS_H
-namespace Nervi {
+namespace NerviKernel {
 
     struct NRegisters {
         char CHAR_REGS[26];

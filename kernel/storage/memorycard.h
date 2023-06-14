@@ -64,8 +64,8 @@ namespace NerviKernel {
     }
 
     /**
-     * \brief The NMemoryCard de that releases all its used resources.
-     * \details Deletes all storage array data that have been reserved by creating an object of the class, clears the list of the locked addresses and defines its size as 0
+     * \brief The NMemoryCard destructor that releases all its used resources.
+     * \details Deletes the memory array, clears the list of the locked addresses and defines its size as 0
      */
     NMemoryCard::~NMemoryCard() {
         delete[] this->storage;
@@ -74,7 +74,8 @@ namespace NerviKernel {
     }
 
     /**
-     * \brief Sets a storage cell's status as write-locked. It pushes back the index to the list of the locked
+     * \brief Locks a cell of the memory array
+     * \details Sets a memory array cell's status as write-locked. It pushes back the index to the list of the locked
      * \param index The address of a cell to lock
      * \throw InvalidIndexException If the index is out of bounds of the storage array
      */
@@ -88,7 +89,7 @@ namespace NerviKernel {
     }
 
     /**
-     * \brief Unlocks a storage cell from write-protection
+     * \brief Unlocks a cell of the memory array
      * \details Unlocks a storage cell from write-protection. It erases the cell to unlock from the list of the locked,
      * but if the required cell is not locked nothing happens
      * \param index The address of an cell to unlock
@@ -117,7 +118,7 @@ namespace NerviKernel {
     }
 
     /**
-     * \brief Writes a value to the cell of the storage at desired index.
+     * \brief Writes a value to a cell of the memory array at desired index.
      * \param index The address of destination
      * \param value The value to write
      * \throw InvalidIndexException If the index is out of bounds of the storage array
@@ -135,9 +136,9 @@ namespace NerviKernel {
     }
 
     /**
-     * Returns a value of a cell of the storage at desired index
-     * @param index The address of a cell to get value
-     * @return The value of selected cell
+     * \brief Returns a value of a cell of the memory array at desired index
+     * \param index The address of a cell to get value
+     * \return The value of selected cell
      * \throw InvalidIndexException If the index is out of bounds of the storage array
      */
     char NMemoryCard::getValueAt(long long index) {

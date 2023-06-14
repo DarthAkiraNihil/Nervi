@@ -6,7 +6,7 @@
 
 #include <memory.h>
 #include <list>
-#include <kernel/error/local.h>
+#include <kernel/error/internal.h>
 #include <kernel/storage/registers.h>
 #include <kernel/constant/regadresses.h>
 #include <stdexcept>

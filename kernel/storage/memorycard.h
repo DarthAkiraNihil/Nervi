@@ -36,6 +36,9 @@ namespace NerviKernel {
             long long getSize();
             void setValueAt(long long index, char value);
             char getValueAt(long long index);
+            void erase(long long address);
+            char pop(long long address);
+            void clear();
     };
 
     bool NMemoryCard::isLocked(long long index) {
@@ -148,6 +151,33 @@ namespace NerviKernel {
             return this->storage[index];
         }
     }
+
+    /**
+     *
+     * \param address
+     */
+    void NMemoryCard::erase(long long address) {
+        if (address < 0 || address > this->size) {
+            throw NerviInternalExceptions::InvalidIndexException(fmt::format("Invalid required index: {} (expected positive and less than {})", address, this->size));
+        } else {
+            this->storage[address] = 0;
+        }
+    }
+
+    char NMemoryCard::pop(long long address) {
+        if (address < 0 || address > this->size) {
+            throw NerviInternalExceptions::InvalidIndexException(fmt::format("Invalid required index: {} (expected positive and less than {})", address, this->size));
+        } else {
+            char temp = this->storage[address];
+            this->storage[address] = 0;
+            return temp;
+        }
+    }
+
+    void NMemoryCard::clear() {
+        memset(this->storage, 0, size);
+    }
+
 }
 
 #endif

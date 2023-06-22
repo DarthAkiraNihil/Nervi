@@ -90,16 +90,25 @@ namespace NerviKernel {
     }
 
     char NVirtualMachineStorage::getRegister(NerviKernel::NRegisterNames registerName) {
-
+        if (registerName > 27) {
+            throw NerviInternalExceptions::InvalidRegisterException(fmt::format("Invalid required register index: {}", int(registerName)));
+        }
+        else {
+            if (registerName == IP) {
+                throw NerviInternalExceptions::InstructionPointerInterruptionPushException("Trying to push a value into IP with the method pushToRegister has no sense due the difference between char and long long types");
+            } else {
+                return this->registers.CHAR_REGS[registerName];
+            }
+        }
     }
     void NVirtualMachineStorage::pushToStack(char value) {
-
+        this->stack.push(value);
     }
     void NVirtualMachineStorage::pushReturnAddress(long long address) {
-
+        this->retStack.push(address);
     }
     char NVirtualMachineStorage::popFromStack() {
-
+        return this->stack.top();
     }
     long long NVirtualMachineStorage::popReturn() {
 

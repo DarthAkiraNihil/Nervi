@@ -38,8 +38,8 @@ namespace NerviKernel {
         EBS, /// The EBS register for common purposes
         EAD, /// The EAD register for common purposes
         EBD, /// The EBD register for common purposes
-        IP , /// The IP register of the number of a currently executing command
         LASTINTR, /// The LASTINTR register that stores the number of the last invoked interrupt
+        IP /// The IP register of the number of a currently executing command
     };
 }
 

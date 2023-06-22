@@ -7,9 +7,8 @@
 namespace NerviKernel {
 
     struct NRegisters {
-        char CHAR_REGS[26];
+        char CHAR_REGS[27];
         long long IP;
-        char LASTINTR;
     };
 
 }

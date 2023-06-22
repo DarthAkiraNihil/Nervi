@@ -20,3 +20,4 @@
 /3rdparty/fmt/README.rst
 /sdk/
 /kernel/storage/test.cpp
+/kernel/storage/old

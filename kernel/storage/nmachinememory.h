@@ -54,6 +54,7 @@ namespace NerviKernel {
         long long popReturn();
         void returnJump();
         void jump(long long destination);
+        void jumpNext();
     };
 
     /**
@@ -169,6 +170,7 @@ namespace NerviKernel {
         this->retStack.pop();
         return temp;
     }
+
     /**
      * \brief Jumps to the last return address
      * \details Jumps to another command address by changing the value of the IP causing by which executing of a command with required address (i. e. number)
@@ -176,12 +178,21 @@ namespace NerviKernel {
     void NVirtualMachineStorage::returnJump() {
         this->jump(this->popReturn());
     }
+
     /**
      * \brief Jumps to a command address
      * \details Jumps to the last return address stored in the return stack. The address is popped after jumping
      */
     void NVirtualMachineStorage::jump(long long destination) {
         this->registers.IP = destination;
+    }
+
+    /**
+     * \brief Jumps to the next command
+     * \details Jumps to the next command by increasing the IP value on 1
+     */
+    void NVirtualMachineStorage::jumpNext() {
+        this->registers.IP++;
     }
 }
 

@@ -1,6 +1,9 @@
 /**
- * \file machinememory.h
- * \brief TEST TEST TEST
+ * \file nmachinememory.h
+ * \brief Contains the definition of the class NVirtualMachineStorage
+ * \details Contains the definition of the class NVirtualMachineStorage and the following documentation
+ * \version 0.1.0-f02e1d99
+ * \author TheSwagVader
  */
 
 

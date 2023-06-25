@@ -47,9 +47,10 @@ namespace NerviKernel {
         //char getValueAt(long long index);
         void pushToRegister(NerviKernel::NRegisterNames registerName, char value);
         char getRegister(NerviKernel::NRegisterNames registerName);
+        long long getIP();
         void pushToStack(char value);
         void pushReturnAddress(long long address);
-        char popFromStack();
+        char popStack();
         long long popReturn();
         void returnJump();
         void jump(long long destination);
@@ -63,6 +64,7 @@ namespace NerviKernel {
     NVirtualMachineStorage::NVirtualMachineStorage(long long size): NMemoryCard(size) {
         memset(this->registers.CHAR_REGS, 0, 27);
         this->registers.IP = 0;
+        //this->stack = stack;
     }
 
     /**
@@ -75,7 +77,17 @@ namespace NerviKernel {
         this->locked.clear();
     }
 
-
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     void NVirtualMachineStorage::pushToRegister(NerviKernel::NRegisterNames registerName, char value) {
         if (registerName > 27) {
             throw NerviInternalExceptions::InvalidRegisterException(fmt::format("Invalid required register index: {}", int(registerName)));
@@ -88,7 +100,17 @@ namespace NerviKernel {
             }
         }
     }
-
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     char NVirtualMachineStorage::getRegister(NerviKernel::NRegisterNames registerName) {
         if (registerName > 27) {
             throw NerviInternalExceptions::InvalidRegisterException(fmt::format("Invalid required register index: {}", int(registerName)));
@@ -101,23 +123,107 @@ namespace NerviKernel {
             }
         }
     }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
+    long long NVirtualMachineStorage::getIP() {
+        return this->registers.IP;
+    }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     void NVirtualMachineStorage::pushToStack(char value) {
         this->stack.push(value);
     }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     void NVirtualMachineStorage::pushReturnAddress(long long address) {
         this->retStack.push(address);
     }
-    char NVirtualMachineStorage::popFromStack() {
-        return this->stack.top();
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
+    char NVirtualMachineStorage::popStack() {
+        char temp = this->stack.top();
+        this->stack.pop();
+        return temp;
     }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     long long NVirtualMachineStorage::popReturn() {
-
+        long long temp = this->retStack.top();
+        this->retStack.pop();
+        return temp;
     }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     void NVirtualMachineStorage::returnJump() {
-
+        this->jump(this->popReturn());
     }
+    /**
+     * \brief Pushes a value to a common register
+     * \brief Pushes a value to a register declared in the enumeration NerviKernel::NRegisterName
+     * \warning The method does not pushes a value to the IP because of type mismatching (long long and char).
+     * If all registers had been long long-typed there could have been memory overusing.
+     * Also Nervi operates with 8-bit memory cells so else there could have been problems if registers had been long-long typed
+     * \param registerName The name of the register from the enumeration NerviKernel::NRegisterName
+     * \param value The value to push
+     * \throw InvalidRegisterException if invalid register name has been passed
+     * \throw InstructionPointerInterruptionPushException if IP has been passed as the register to push to
+     */
     void NVirtualMachineStorage::jump(long long destination) {
-
+        this->registers.IP = destination;
     }
 }
 

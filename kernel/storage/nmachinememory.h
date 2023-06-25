@@ -72,11 +72,7 @@ namespace NerviKernel {
      * \brief The NVirtualMachineStorage destructor that releases all its used resources.
      * \details Deletes all storage array data that have been reserved by creating an object of the class, clears the list of the locked addresses and defines its size as 0
      */
-    NVirtualMachineStorage::~NVirtualMachineStorage() {
-        delete[] this->storage;
-        this->size = 0;
-        this->locked.clear();
-    }
+    NVirtualMachineStorage::~NVirtualMachineStorage() = default;
 
     /**
      * \brief Pushes a value to a common register

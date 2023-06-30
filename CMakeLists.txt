@@ -11,6 +11,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty/fmt/include)
+include_directories(${CMAKE_SOURCE_DIR}/3rdparty)
 
 add_subdirectory(3rdparty/fmt EXCLUDE_FROM_ALL)
 

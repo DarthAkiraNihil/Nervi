@@ -30,7 +30,7 @@ struct NRawCommandArgument {
  */
 struct NCommandTokens {
     std::string rPluginIndex, rCommandIndex;
-    NRawMemoryAddress fArg, sArg;
+    NRawCommandArgument fArg, sArg;
 };
 
 #endif //NERVI_NTOKENS_H

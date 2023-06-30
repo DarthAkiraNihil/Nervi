@@ -43,6 +43,14 @@ namespace NerviInternalExceptions {
 
         const char *what() const noexcept override { return message_.c_str(); }
     };
+    class DeveloperTestException : public std::exception {
+    private:
+        std::string message_;
+    public:
+        explicit DeveloperTestException(const std::string &message);
+
+        const char *what() const noexcept override { return message_.c_str(); }
+    };
 
     InstructionPointerInterruptionPushException::InstructionPointerInterruptionPushException(const std::string &message) : message_(message) {}
 
@@ -51,6 +59,8 @@ namespace NerviInternalExceptions {
     InvalidIndexException::InvalidIndexException(const std::string &message) : message_(message) {}
 
     InvalidRegisterException::InvalidRegisterException(const std::string &message) : message_(message) {}
+
+    DeveloperTestException::DeveloperTestException(const std::string &message) : message_(message) {}
 
 }
 #endif //NERVI_LOCAL_H

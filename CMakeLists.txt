@@ -16,6 +16,7 @@ include_directories(${CMAKE_SOURCE_DIR}/3rdparty)
 add_subdirectory(3rdparty/fmt EXCLUDE_FROM_ALL)
 
 add_executable(NerviTestMem kernel/storage/test.cpp ${SOURCES})
+add_executable(NerviTestLexis kernel/lexis/test.cpp ${SOURCES})
 
 target_link_libraries(NerviTestMem PRIVATE fmt::fmt-header-only)
 
